@@ -128,7 +128,6 @@ async def text_sentiment(text):
     kalimat = text.split('.')
     aspects = []
 
-    if not kalimat:
         for sentence in kalimat:
             doc = nlp(sentence)
             target = ''
