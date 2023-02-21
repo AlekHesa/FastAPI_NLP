@@ -1,0 +1,6 @@
+
+#Homepage
+Run homepage with streamlit run homepage.py
+
+#Main
+run main with uvicorn main:app --reload
