@@ -53,10 +53,7 @@ async def sentiment_file(file:UploadFile = File(...)):
     data = data.decode()
 
     sentiment = await text_sentiment(data)
-    file.close()
+    await file.close()
     return sentiment
 
 
-
-if __name__ == "__main__":
-    uvicorn.run("main:app")

@@ -128,36 +128,36 @@ async def text_sentiment(text):
     kalimat = text.split('.')
     aspects = []
 
-        for sentence in kalimat:
-            doc = nlp(sentence)
-            target = ''
-            desc_term = ''
+    for sentence in kalimat:
+        doc = nlp(sentence)
+        target = ''
+        desc_term = ''
 
-            for token in doc:
-                if token.dep_ == 'nsubj' and token.pos_ == 'NOUN':
-                    target = token.text
-                if token.pos_ == 'ADJ':
-                    prepend = ''
-                    for child in token.children:
-                        if child.pos_ != 'ADV':
-                            continue
-                        prepend += child.text + ' '
-                    desc_term = prepend + token.text
+        for token in doc:
+            if token.dep_ == 'nsubj' and token.pos_ == 'NOUN':
+                target = token.text
+            if token.pos_ == 'ADJ':
+                prepend = ''
+                for child in token.children:
+                    if child.pos_ != 'ADV':
+                        continue
+                    prepend += child.text + ' '
+                desc_term = prepend + token.text
 
-            aspects.append(
-                {'aspects' : target,
-                'desc': desc_term}
-            )
+        aspects.append(
+            {'aspects' : target,
+            'desc': desc_term}
+        )
 
-            for aspect in aspects:
-                aspect['subjectivity'] = TextBlob(aspect['desc']).subjectivity
-                aspect['polarity'] = TextBlob(aspect['desc']).polarity
-                
+        for aspect in aspects:
+            aspect['subjectivity'] = TextBlob(aspect['desc']).subjectivity
+            aspect['polarity'] = TextBlob(aspect['desc']).polarity
+            
 
-                if aspect['subjectivity'] > 0 and aspect['polarity'] > 0:
-                    aspect['sentiment'] = "Positive"
-                else:
-                    aspect['sentiment'] = "Negative"
+            if aspect['subjectivity'] > 0 and aspect['polarity'] > 0:
+                aspect['sentiment'] = "Positive"
+            else:
+                aspect['sentiment'] = "Negative"
 
-        return aspects
+    return aspects
     

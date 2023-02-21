@@ -34,7 +34,7 @@ with tab2:
         res = requests.post(url="http://127.0.0.1:8000/NLP/Sentiment",data = json.dumps(sentiment))
         res_json = res.json()
         st.subheader("Sentiment Result  = " )  
-        st.write(res_json)
+        
 
         if res_json :
             try:
@@ -54,17 +54,17 @@ with tab3:
     uploaded_file = st.file_uploader("Choose a file") 
     if st.button('Check your sentiment'):
        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-       data = uploaded_file.read()
+       data = stringio.read()
+       test = uploaded_file.getvalue()
        
-       url = "http://127.0.0.1/upload/sentiment"
+       
 
-       res = requests.post(url,data = data)
-
+       res = requests.post(url="http://127.0.0.1:8000/upload",data = uploaded_file)
+       res_json = res.json()
 
 
        st.subheader("Result : ")
-       st.write(res)
-
+       
         
          
             
