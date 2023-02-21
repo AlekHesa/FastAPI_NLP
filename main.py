@@ -7,7 +7,7 @@ from tortoise import Model
 from io import StringIO
 import csv
 from fastapi.responses import HTMLResponse
-
+import uvicorn
 
 from fastapi.staticfiles import StaticFiles
 from PIL import Image
@@ -17,15 +17,10 @@ from PIL import Image
 class text(BaseModel):
     text : str
 
-class save(BaseModel):
-    id : int
-    nama: str
-    umur : int
-    tinggi : int
 
 app = FastAPI()
 
-app.mount("/static",StaticFiles(directory="static"),name="static")
+
 
 @app.get("/")
 async def index():
@@ -61,3 +56,7 @@ async def sentiment_file(file:UploadFile = File(...)):
     file.close()
     return sentiment
 
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app")
