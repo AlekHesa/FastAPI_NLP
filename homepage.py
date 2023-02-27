@@ -56,14 +56,11 @@ with tab3:
        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
        data = stringio.read()
        test = uploaded_file.getvalue()
-       
-       
-
-       res = requests.post(url="http://127.0.0.1:8000/upload",data = uploaded_file)
-       res_json = res.json()
 
 
        st.subheader("Result : ")
+       st.write(test)
+       st.write(data)
        
         
          

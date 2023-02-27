@@ -68,8 +68,8 @@ async def rangkum(text):
     return summary
 
 async def text_summary(text):
-    extra_words = list(STOP_WORDS)+list(punctuation)+['\n']
-    nlp = spacy.load('en_core_web_sm')
+    extra_words = list(STOP_WORDS)+list(punctuation)+['\n']+['\n\n']
+   
 
     
     docx = nlp(text)
