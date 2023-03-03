@@ -8,6 +8,7 @@ from io import StringIO
 import csv
 from fastapi.responses import HTMLResponse
 import uvicorn
+from GPT3 import *
 
 from fastapi.staticfiles import StaticFiles
 from PIL import Image
@@ -20,6 +21,13 @@ class text(BaseModel):
 
 app = FastAPI()
 
+
+def generate_prompt(process):
+    return """
+        Summarize this text :
+        {}
+    
+    """.format(process)
 
 
 @app.get("/")
@@ -55,5 +63,11 @@ async def sentiment_file(file:UploadFile = File(...)):
     sentiment = await text_sentiment(data)
     await file.close()
     return sentiment
+
+@app.post("/GPT3/Summarize")
+async def sum(text:text):
+    generate = generate_prompt(text)
+    result = proccess(generate)
+    return result
 
 
